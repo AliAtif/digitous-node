@@ -7,13 +7,14 @@ app.listen(port, () => {
   console.log('Server started on port: ' + port);
 });
 
+
+//exe-0
 app.get("/", (request, response) => {
     response.send("Authors API");
 })
 
 
-/*Exercice 1 */
-
+/*//exe-1 */
 
 const authors = ["Lawrence Nowell, UK", "William Shakespeare, UK",
  "Charles Dickens, US", "Oscar Wilde, UK"]
@@ -25,28 +26,28 @@ const data = [{
     id : 1,
     author: "Lawrence Nowell",
     nationality: "UK",
-    book: "Beowulf"
+    books: "Beowulf"
 },
 
  {
     id : 2,
     author: "William Shakespeare",
     nationality: "UK",
-    book: "Hamlet, Othello, Romeo and Juliet, MacBeth"
+    books: "Hamlet, Othello, Romeo and Juliet, MacBeth"
 },
 
  {
     id : 3,
     author: "Charles Dickens",
     nationality: "US",
-    book: "Oliver Twist, A Christmas Carol"
+    books: "Oliver Twist, A Christmas Carol"
 }, 
 
 {   
     id : 4,
     author: "Oscar Wilde",
     nationality: "UK",
-    book: "The Picture of Dorian Gray, The Importance of Being Earnest",
+    books: "The Picture of Dorian Gray, The Importance of Being Earnest",
 }]
 
 app.get("/authors/:id", (request, response) => {
@@ -55,9 +56,12 @@ app.get("/authors/:id", (request, response) => {
     }
      else{
         response.send(`${authors[request.params.id]}`)
-     }}
+     } 
+    }
 
      )
+
+  
       
 
 app.get("/cars/", (request, res) => {
