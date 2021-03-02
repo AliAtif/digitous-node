@@ -1,70 +1,105 @@
-const { request, response } = require('express');
-const express = require('express');
+const express = require("express");
 const app = express();
-
 const port = 8000;
+
+const ListAuthors = [
+  {
+    authors: {
+      name: "Lawrence Nowell",
+      nationality: "UK",
+    },
+    books: {
+      books: "Beowulf",
+    },
+  },
+  {
+    authors: {
+      name: "William Shakespeare",
+      nationality: "UK",
+    },
+    books: {
+      books: "Hamlet, Othello, Romeo and Juliet, MacBeth",
+    },
+  },
+  {
+    authors: {
+      name: "Charles Dickens",
+      nationality: "US",
+    },
+    books: {
+      books: "Oliver Twist, A Christmas Carol",
+    },
+  },
+  {
+    authors: {
+      name: "Oscar Wilde",
+      nationality: "UK",
+    },
+    books: {
+      books: "The Picture of Dorian Gray, The Importance of Being Earnest",
+    },
+  },
+];
+
+// console.log(ListAuthors[1].books)
 app.listen(port, () => {
-  console.log('Server started on port: ' + port);
+  console.log(`Serveur lancé, pour y acceder ouvrez http://localhost:${port}`);
+});
+app.get("/", (req, res) => {
+  res.send("Authors API");
 });
 
-
-//exe-0
-app.get("/", (request, response) => {
-    response.send("Authors API");
-})
-
-
-/*//exe-1 */
-
-const authors = ["Lawrence Nowell, UK", "William Shakespeare, UK",
- "Charles Dickens, US", "Oscar Wilde, UK"]
- 
-const books = ["Beowulf", "Hamlet, Othello, Romeo and Juliet, MacBeth", 
-"Oliver Twist, A Christmas Carol", "The Picture of Dorian Gray, The Importance of Being Earnest"]
-
-const data = [{
-    id : 1,
-    author: "Lawrence Nowell",
-    nationality: "UK",
-    books: "Beowulf"
-},
-
- {
-    id : 2,
-    author: "William Shakespeare",
-    nationality: "UK",
-    books: "Hamlet, Othello, Romeo and Juliet, MacBeth"
-},
-
- {
-    id : 3,
-    author: "Charles Dickens",
-    nationality: "US",
-    books: "Oliver Twist, A Christmas Carol"
-}, 
-
-{   
-    id : 4,
-    author: "Oscar Wilde",
-    nationality: "UK",
-    books: "The Picture of Dorian Gray, The Importance of Being Earnest",
-}]
-
-app.get("/authors/:id", (request, response) => {
-    if (authors[request.params.id] === undefined) {
-        response.send(`The author with the ID ${request.params.id} does not exist`)
+app.get("/authors/:id", (req, res) => {
+  switch (req.params.id) {
+    case "1":
+      res.send("Lawrence Nowell, UK");
+      break;
+    case "2":
+      res.send("William Shakespeare, UK");
+      break;
+    case "3":
+      res.send("Charles Dickens, US");
+      break;
+    case "4":
+      res.send("Oscar Wilde, UK");
+      break;
+    default:
+      res.send(`the author with the ID ${req.params.id} does not exist`);
+  }
+});
+app.get("/authors/:id/books", (req, res) => {
+  switch (req.params.id) {
+    case "1":
+      res.send("Beowulf");
+      break;
+    case "2":
+      res.send("Hamlet, Othello, Romeo and Juliet, MacBeth");
+      break;
+    case "3":
+      res.send("Oliver Twist, A Christmas Carol");
+      break;
+    case "4":
+      res.send("The Picture of Dorian Gray, The Importance of Being Earnest");
+      break;
+  }
+});
+app.get("/json/authors/:id", (req, res) => {
+    console.log(req.params.id);
+    if (Number.isInteger(parseInt(req.params.id))) {
+        if (parseInt(req.params.id) < ListAuthors.length) {
+            res.send(ListAuthors[req.params.id - 1].authors);
+        } else {
+            res.send(`the author with the ID ${req.params.id} does not exist`);
+        }
+    } else {
+        res.send("l'id doit etre un entier");
     }
-     else{
-        response.send(`${authors[request.params.id]}`)
-     } 
-    }
+});
 
-     )
+app.get("/json/authors/:id/books", (req, res) => {
+  res.send(ListAuthors[req.params.id - 1].books);
+});
 
-  
-      
-
-app.get("/cars/", (request, res) => {
-    response.send("error")
-})
-
+app.get("*", (req, res) => {
+  res.send("ERROR 404");
+});
