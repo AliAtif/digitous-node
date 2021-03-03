@@ -10,7 +10,7 @@ app.set("view engine", "handlebars");
 app.use(express.static("public"));
 
 app.get("/", (req, res) => {
-    res.send("home");
+    res.render("home");
   });
 
 app.listen(port, () => {
@@ -18,20 +18,20 @@ app.listen(port, () => {
 });
 
 app.get('/contact', (req, res) => {
-  res.send('Contact');
+  res.render('Contact');
 });
 app.get('/page2', (req, res) => {
-  res.send('Page2');
+  res.render('Page2');
 });
 app.get('/post', (req, res) => {
-  res.send('Post!');
+  res.render('Post!');
 });
 app.get('/recipe', (req, res) => {
-  res.send('Recipe!');
+  res.render('Recipe!');
 });
 app.get('/team-member', (req, res) => {
-  res.send('Team-member!');
+  res.render('Team-member!');
 });
 app.get('/team', (req, res) => {
-  res.send('Team');
+  res.render('Team');
 });
