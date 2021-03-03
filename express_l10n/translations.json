@@ -4,18 +4,18 @@
     "fr": {
         "lang": "fr",
         "text": "bonjour, ça va ?",
-        "image":  "./public/fr.png"
+        "img":  "./public/fr.png"
     },
     "en": {
         "lang": "en",
         "text": "Hello, how are you?",
-        "image": "./public/en.jpg"
+        "img": "./public/en.jpg"
     },
 
      
      "es": {
         "lang": "es",
         "text": "Buenos días qué tal ?",
-        "image": "./public/es.jpg"
+        "img": "./public/es.jpg"
       }
     }

@@ -17,15 +17,15 @@ app.listen(port, () => {
 app.get("/:lang?", (req, res) => {
   switch (req.params.lang) {
     case "fr":
-      res.render("home", {title:"fr.text"});
+      res.render("home", {title:"fr.text", img:"./public/fr.png"});
       break;
     case "en":
-      res.render("home", {title: 'en.text'});
+      res.render("home", {title: "en.text", img: "./public/en.jpg"});
       break;
     case "es":
-      res.render("home", {title: "es.text"});
+      res.render("home", {title: "es.text", img:"./public/es.jpg"});
       break;
     default:
-      res.render("home", {title: "fr.text"});
+      res.render("home", {title: "fr.text", img:"./public/fr.png"});
   }
 });
