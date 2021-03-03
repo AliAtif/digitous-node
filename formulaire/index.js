@@ -11,7 +11,7 @@ app.set("view engine", "handlebars");
 app.use(express.static('public'));
 
 app.listen(port, () => {
-    console.log("Server started on port " + port)
+    console.log(`Serveur lancé ${port}`)
 })
 
 app.get("/", (req, res) => {
