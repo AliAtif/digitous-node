@@ -10,8 +10,17 @@
     <link rel="stylesheet" href="./css/bootstrap.min.css" />
     <link rel="stylesheet" href="./css/main.css" />
     <link rel="stylesheet" href="./css/homepage.css" />
+    {{#each stylesheets }}
+    <link rel="stylesheet" href="{{{href}}}" />
+    {{/each}}
 </head>
 <body>
+    {{>nav}}
+    {{>header}}
     {{{body}}}
+    {{>footer}}
+    {{#each scripts }}
+    <script src="{{{src}}}" {{#if async}}async{{/if}} {{#if defer}}defer{{/if}}></script>
+    {{/each}}
 </body>
 </html>
