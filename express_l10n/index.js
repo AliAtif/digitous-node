@@ -1,31 +1,46 @@
 const express = require("express");
+const expressHandlebars = require("express-handlebars");
+
 const app = express();
 const port = 8000;
 
-const exphbs = require("express-handlebars");
+app.use(express.static("public"));
 
-app.engine("handlebars", exphbs());
+app.engine("handlebars", expressHandlebars());
 app.set("view engine", "handlebars");
 
-app.use(express.static("public"));
-app.use(express.static("images"));
-
 app.listen(port, () => {
-  console.log(`Serveur lancé ${port}`);
+  console.log("Serveur lancé");
 });
 
+ const translations = {
+  fr: {
+    message: "Bonjour, Ca va ? ",
+    flag: "/img/fra.svg",
+  },
+  en: {
+    message: "Hello, How are you ?",
+    flag: "/img/gbr.svg",
+  },
+  es: {
+    message: "Hola, como esta ?",
+    flag: "/img/esp.svg",
+  },
+  ge: {
+    message: "Guten tag, wie bist du ?",
+    flag: "/img/deu.svg",
+  },
+};
+
 app.get("/:lang?", (req, res) => {
-  switch (req.params.lang) {
-    case "fr":
-      res.render("home", {title:"fr.text", img:"./public/fr.png"});
-      break;
-    case "en":
-      res.render("home", {title: "en.text", img: "./public/en.jpg"});
-      break;
-    case "es":
-      res.render("home", {title: "es.text", img:"./public/es.jpg"});
-      break;
-    default:
-      res.render("home", {title: "fr.text", img:"./public/fr.png"});
-  }
+  res.render("home", {
+    lang: translations[req.params.lang ? req.params.lang : "fr"],
+    languages: Object.keys(translations),
+  });
+  /*
+  if (req.params.lang) {
+    res.render("home", {lang: translations[req.params.lang]})
+  } else {
+    res.render("home", {lang: translations["fr"]});
+  }*/
 });
